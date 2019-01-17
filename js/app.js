@@ -162,6 +162,7 @@ postBtn.on('click', function () {
     fetch('http://localhost:3000/api', {
         method: 'POST',
         headers: {
+            'Access-Control-Allow-Origin': '*',
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(data)
@@ -181,7 +182,11 @@ postBtn.on('click', function () {
 // Obtener mensajes del servidor
 function getMensajes() {
 
-    fetch('http://localhost:3000/api')
+    fetch('http://localhost:3000/api', {
+        headers: {
+            'Access-Control-Allow-Origin': '*'
+        },
+    })
         .then(res => res.json())
         .then(posts => {
 
@@ -287,7 +292,11 @@ function notificame() {
 
 function getPublicKey() {
 
-    return fetch('http://localhost:3000/api/key')
+    return fetch('http://localhost:3000/api/key',{
+        headers: {
+            'Access-Control-Allow-Origin': '*'
+        },
+    })
         .then(resp => resp.arrayBuffer())
         .then(key => new Uint8Array(key));
 }
@@ -312,6 +321,7 @@ btnDesactivadas.on('click', function () {
                     body: JSON.stringify(subscripcion),
                     method: 'POST',
                     headers: {
+                        'Access-Control-Allow-Origin': '*',
                         'Content-Type': 'application/json'
                     }
                 })
